@@ -10,11 +10,14 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GoodsDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,6 +44,9 @@ public class GoodsDetail {
 	@Column
 	private String goods_disdate;
 	
+	@Column
+	private String goods_blinded;
+	
 	@JsonBackReference 
 	@OneToOne
 	@JoinColumn(name="goods", referencedColumnName="goods_id")
@@ -48,7 +54,9 @@ public class GoodsDetail {
 
 	@Builder
 	public GoodsDetail(long gd_id, String goods_stock, String goods_option1, String goods_option2,
-			String goods_sellcount, String goods_price, String goods_disprice, String goods_disdate, Goods goods) {
+			String goods_sellcount, String goods_price, String goods_disprice, String goods_disdate,
+			String goods_blinded, Goods goods) {
+		super();
 		this.gd_id = gd_id;
 		this.goods_stock = goods_stock;
 		this.goods_option1 = goods_option1;
@@ -57,6 +65,7 @@ public class GoodsDetail {
 		this.goods_price = goods_price;
 		this.goods_disprice = goods_disprice;
 		this.goods_disdate = goods_disdate;
+		this.goods_blinded = goods_blinded;
 		this.goods = goods;
 	}
 
