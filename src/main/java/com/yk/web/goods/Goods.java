@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -49,8 +48,8 @@ public class Goods {
 	private String goods_relevant;
 	
 	@JsonManagedReference 
-	@OneToOne(mappedBy = "goods", fetch = FetchType.LAZY)
-	private GoodsDetail goodsDetail;
+	@OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
+	private List<GoodsDetail> goodsDetail = new ArrayList<>();
 	
 	@JsonManagedReference 
 	@OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
@@ -58,7 +57,7 @@ public class Goods {
 
 	@Builder
 	public Goods(long goods_id, String goods_name, String goods_category1, String goods_category2, String goods_brname,
-			String goods_thumbnail, String goods_date, String goods_relevant, GoodsDetail goodsDetail,
+			String goods_thumbnail, String goods_date, String goods_relevant, List<GoodsDetail> goodsDetail,
 			List<GoodsImages> goodsImages) {
 		this.goods_id = goods_id;
 		this.goods_name = goods_name;

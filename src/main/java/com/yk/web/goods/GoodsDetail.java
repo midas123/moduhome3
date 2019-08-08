@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -45,17 +45,17 @@ public class GoodsDetail {
 	private String goods_disdate;
 	
 	@Column
-	private String goods_blinded;
+	private boolean goods_blinded;
 	
 	@JsonBackReference 
-	@OneToOne
-	@JoinColumn(name="goods", referencedColumnName="goods_id")
+	@ManyToOne
+	@JoinColumn(name="goods_id", referencedColumnName="goods_id")
 	private Goods goods;
 
 	@Builder
 	public GoodsDetail(long gd_id, String goods_stock, String goods_option1, String goods_option2,
 			String goods_sellcount, String goods_price, String goods_disprice, String goods_disdate,
-			String goods_blinded, Goods goods) {
+			boolean goods_blinded, Goods goods) {
 		super();
 		this.gd_id = gd_id;
 		this.goods_stock = goods_stock;
