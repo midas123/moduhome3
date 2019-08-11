@@ -29,20 +29,17 @@ public class GoodsDetail {
 	@Column
 	private String goods_option1;
 
-	@Column
+	@Column(columnDefinition="INT(11)")
 	private String goods_option2;
 	
-	@Column
+	@Column(columnDefinition="INT", length=11)
 	private String goods_sellcount;
 	
-	@Column
+	@Column(columnDefinition="Deciaml(7,0) default '0'")
 	private String goods_price;
 	
-	@Column
+	@Column(columnDefinition="Deciaml(7,0) default '0'")
 	private String goods_disprice;
-
-	@Column
-	private String goods_disdate;
 	
 	@Column
 	private boolean goods_blinded;
@@ -54,7 +51,7 @@ public class GoodsDetail {
 
 	@Builder
 	public GoodsDetail(long gd_id, String goods_stock, String goods_option1, String goods_option2,
-			String goods_sellcount, String goods_price, String goods_disprice, String goods_disdate,
+			String goods_sellcount, String goods_price, String goods_disprice,
 			boolean goods_blinded, Goods goods) {
 		super();
 		this.gd_id = gd_id;
@@ -64,7 +61,6 @@ public class GoodsDetail {
 		this.goods_sellcount = goods_sellcount;
 		this.goods_price = goods_price;
 		this.goods_disprice = goods_disprice;
-		this.goods_disdate = goods_disdate;
 		this.goods_blinded = goods_blinded;
 		this.goods = goods;
 	}

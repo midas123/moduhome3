@@ -1,6 +1,7 @@
 package com.yk.web.goods;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
@@ -41,8 +45,10 @@ public class Goods {
 	@Column
 	private String goods_thumbnail;
 	
-	@Column
-	private String goods_date;
+	@Column(columnDefinition="DATE")
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date goods_date;
 	
 	@Column
 	private String goods_relevant;
@@ -57,7 +63,7 @@ public class Goods {
 
 	@Builder
 	public Goods(long goods_id, String goods_name, String goods_category1, String goods_category2, String goods_brname,
-			String goods_thumbnail, String goods_date, String goods_relevant, List<GoodsDetail> goodsDetail,
+			String goods_thumbnail, Date goods_date, String goods_relevant, List<GoodsDetail> goodsDetail,
 			List<GoodsImages> goodsImages) {
 		this.goods_id = goods_id;
 		this.goods_name = goods_name;
