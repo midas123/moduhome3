@@ -1,5 +1,7 @@
 package com.yk.web.goods;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,13 +35,13 @@ public class GoodsDetail {
 	private String goods_option2;
 	
 	@Column(columnDefinition="INT", length=11)
-	private String goods_sellcount;
+	private int goods_sellcount;
 	
-	@Column(columnDefinition="Deciaml(7,0) default '0'")
-	private String goods_price;
+	@Column(columnDefinition="Decimal(7,0) default '0'")
+	private BigDecimal goods_price;
 	
-	@Column(columnDefinition="Deciaml(7,0) default '0'")
-	private String goods_disprice;
+	@Column(columnDefinition="Decimal(7,0) default '0'")
+	private BigDecimal goods_disprice;
 	
 	@Column
 	private boolean goods_blinded;
@@ -51,7 +53,7 @@ public class GoodsDetail {
 
 	@Builder
 	public GoodsDetail(long gd_id, String goods_stock, String goods_option1, String goods_option2,
-			String goods_sellcount, String goods_price, String goods_disprice,
+			int goods_sellcount, BigDecimal goods_price, BigDecimal goods_disprice,
 			boolean goods_blinded, Goods goods) {
 		super();
 		this.gd_id = gd_id;
