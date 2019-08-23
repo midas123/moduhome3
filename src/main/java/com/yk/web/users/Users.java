@@ -1,10 +1,9 @@
 package com.yk.web.users;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +14,9 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Users {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long user_id;
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long user_id;
 	
 	@Column
 	private String username;
@@ -26,13 +26,26 @@ public class Users {
 	
 	@Column
 	private String email;
+	
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Roles> roles = new HashSet<>();
 
 	@Builder
-	public Users(long user_id, String username, String password, String email) {
-		this.user_id = user_id;
+	public Users(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+
+	public void setPassword(String encode) {
+		this.password = encode;
+	}
+
+	public void setRoles(Set<Roles> singleton) {
+		this.roles = singleton;
 	}
 
 }

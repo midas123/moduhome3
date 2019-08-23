@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Roles {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long role_id;
 
     @Enumerated(EnumType.STRING)
     @NaturalId //컬럼 데이터를 인덱싱하고 검색 퍼포먼스를 향상시킴 
