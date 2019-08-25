@@ -52,7 +52,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDto dto) {
 	
-	    Authentication authentication = authenticationManager.authenticate(
+	    Authentication authentication = authenticationManager.authenticate( //AuthenticationManager 객체가 토큰 유효성 검사
 	            new UsernamePasswordAuthenticationToken( dto.getUsername(), dto.getPassword())
 	    );
 	
