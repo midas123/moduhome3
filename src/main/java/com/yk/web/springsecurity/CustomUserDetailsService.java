@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Let people login with either username or email
         Users user = usersRepository.findByUsername(username)
                 .orElseThrow(() -> 
-                        new UsernameNotFoundException("User not found with username: " + username)
+                        new UsernameNotFoundException(username+"님은 회원이 아닙니다.")
         );
 
         return UserPrincipal.create(user);
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserById(Long id) {
         Users user = usersRepository.findById(id).orElseThrow(
-            () -> new UsernameNotFoundException("User not found with id : " + id)
+            () -> new UsernameNotFoundException("회원이 존재하지 않습니다.")
         );
 
         return UserPrincipal.create(user);

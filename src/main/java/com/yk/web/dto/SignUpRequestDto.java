@@ -15,8 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignUpRequestDto {
-	@Autowired
-	PasswordEncoder passwordEncoder;
+
 	
 //	@NotBlank
 //	@Size(min = 4, max = 40)
@@ -38,7 +37,7 @@ public class SignUpRequestDto {
 	public Users toEntity() {
 		return Users.builder()
 				.username(username)
-				.password(passwordEncoder.encode(password))
+				.password(password)
 				.email(email)
 				.build();
 	}

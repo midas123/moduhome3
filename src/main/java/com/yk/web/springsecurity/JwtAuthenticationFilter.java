@@ -29,14 +29,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	        try {
 	            String jwt = getJwtFromRequest(request);
 
-	            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-	                Long userId = tokenProvider.getUserIdFromJWT(jwt);
-
-	                UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+	            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) { //토큰 유효성 검사
+	                Long userId = tokenProvider.getUserIdFromJWT(jwt); //토큰에서 유저ID 추출
+	                UserDetails userDetails = customUserDetailsService.loadUserById(userId); //사용자 정보로 UserDetails 객체 생성(
 	                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-	                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-	                SecurityContextHolder.getContext().setAuthentication(authentication);
+	                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); //요청 객체에 정보(ip주소, 세션id)를 authentication 객채에 저장
+	                SecurityContextHolder.getContext().setAuthentication(authentication); //principal를 포함하는 security context를 SecurityContextHolder에 저장
 	            }
 	        } catch (Exception ex) {
 	            logger.error("Could not set user authentication in security context", ex);

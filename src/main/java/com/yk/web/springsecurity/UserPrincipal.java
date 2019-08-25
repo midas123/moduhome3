@@ -13,9 +13,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
-	   private Long id;
+	    private Long id;
 
-	    private String name;
+	    //private String name;
 
 	    private String username;
 
@@ -55,9 +55,9 @@ public class UserPrincipal implements UserDetails {
 	        return id;
 	    }
 
-	    public String getName() {
-	        return name;
-	    }
+//	    public String getName() {
+//	        return name;
+//	    }
 
 	    public String getEmail() {
 	        return email;

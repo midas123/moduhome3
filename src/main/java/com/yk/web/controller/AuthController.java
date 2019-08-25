@@ -56,9 +56,9 @@ public class AuthController {
 	            new UsernamePasswordAuthenticationToken( dto.getUsername(), dto.getPassword())
 	    );
 	
-	    SecurityContextHolder.getContext().setAuthentication(authentication);
+	    SecurityContextHolder.getContext().setAuthentication(authentication);//사용자 정보가 담긴 SecurityContext를 SecurityContextHolder에 저장
 	
-	    String jwt = tokenProvider.generateToken(authentication);
+	    String jwt = tokenProvider.generateToken(authentication); //토큰 생성
 	    return ResponseEntity.ok(new JwtAuthResponseDto(jwt));
 	}
 	
@@ -73,19 +73,19 @@ public class AuthController {
 		    return new ResponseEntity(new ApiResponseDto(false, "이미 사용 중인 이메일 입니다."),
 		            HttpStatus.BAD_REQUEST);
 		}
-	
-		Users user = signUpRequest.toEntity();
-		//user.setPassword(passwordEncoder.encode(user.getPassword()));
-		Roles userRole = rolesRepository.findByName(RoleName.ROLE_USER)
+		System.out.println("1: " +signUpRequest.getPassword());
+		Users user = signUpRequest.toEntity(); //Dto 객체에 담긴 사용자 정보를 Users 객채에 저장
+		user.setPassword(passwordEncoder.encode(signUpRequest.getPassword())); //비밀번호 암호화
+		Roles userRole = rolesRepository.findByName(RoleName.ROLE_USER) // 사용자 등급을 저장하는 객체
 		        .orElseThrow(() -> new AppException("사용자 등급을 설정해주세요."));
 		
-		user.setRoles(Collections.singleton(userRole)); 
-		Users result = usersRepository.save(user);
+		user.setRoles(Collections.singleton(userRole)); //한개의 사용자 등급만 포함하는 immutable singleton Set을 리턴
+		Users result = usersRepository.save(user); //사용자 정보를 DB에 저장
 		
 		URI location = ServletUriComponentsBuilder
 		        .fromCurrentContextPath().path("/api/users/{username}")
 		        .buildAndExpand(result.getUsername()).toUri();
 		
-		return ResponseEntity.created(location).body(new ApiResponseDto(true, "회원 가입이 안료되었습니다."));
+		return ResponseEntity.created(location).body(new ApiResponseDto(true, "회원 가입이 완료되었습니다."));
 	}
 }
