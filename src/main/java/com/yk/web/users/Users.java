@@ -1,9 +1,13 @@
 package com.yk.web.users;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import com.yk.web.order.Orders;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Users {
 	@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long user_id;
 	
@@ -32,9 +35,13 @@ public class Users {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles = new HashSet<>();
-
+    
+    @OneToMany
+    List<Orders> orders = new ArrayList<>();
+    
 	@Builder
-	public Users(String username, String password, String email) {
+	public Users(String username, String password, String email, Long user_id) {
+		this.user_id = user_id;
 		this.username = username;
 		this.password = password;
 		this.email = email;

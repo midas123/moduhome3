@@ -33,12 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().exceptionHandling()
-        //.authenticationEntryPoint(unauthorizedHandler)
+        .authenticationEntryPoint(unauthorizedHandler)
         .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests()
-			.antMatchers("/api/**","/api-user/**","/images/**").permitAll()
+			.antMatchers("/api/**","/api-user/**","/api-product/**","/images/**").permitAll()
 			.anyRequest().authenticated();
 		 // Add our custom JWT security filter
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

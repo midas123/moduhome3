@@ -1,6 +1,8 @@
 package com.yk.web.goods;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.yk.web.order.Orders;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,11 +26,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GoodsDetail {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long gd_id;
 	
 	@Column
-	private String goods_stock;
+	private int goods_stock;
 	
 	@Column
 	private String goods_option1;
@@ -50,9 +54,10 @@ public class GoodsDetail {
 	@ManyToOne
 	@JoinColumn(name="goods_id", referencedColumnName="goods_id")
 	private Goods goods;
+	
 
 	@Builder
-	public GoodsDetail(long gd_id, String goods_stock, String goods_option1, String goods_option2,
+	public GoodsDetail(long gd_id, int goods_stock, String goods_option1, String goods_option2,
 			int goods_sellcount, BigDecimal goods_price, BigDecimal goods_disprice,
 			boolean goods_blinded, Goods goods) {
 		super();

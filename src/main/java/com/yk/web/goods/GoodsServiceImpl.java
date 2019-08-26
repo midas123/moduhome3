@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yk.web.dto.OrderGoodsRequestDto;
+
 @Service
 public class GoodsServiceImpl {
 	@Autowired
@@ -18,10 +20,9 @@ public class GoodsServiceImpl {
 	
 	
 	public List<Goods> getAllGoods() {
-		List<Goods> goods = goodsRepository.findAll();
-		
-		return goods;
+		return goodsRepository.findAll();
 	}
+	
 	
 	
 }
