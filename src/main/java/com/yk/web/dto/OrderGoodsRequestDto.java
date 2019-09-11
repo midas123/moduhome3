@@ -1,6 +1,9 @@
 package com.yk.web.dto;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yk.web.order.Delivery;
 import com.yk.web.order.OrderItems;
 import com.yk.web.order.Orders;
@@ -22,7 +25,7 @@ public class OrderGoodsRequestDto {
 	
 	private String item_name;
 
-	private String order_quantity;
+	private String item_quantity;
 	
 	private String item_option1;
 	
@@ -30,17 +33,10 @@ public class OrderGoodsRequestDto {
 	
 	private int item_price;
 	
-	private String orderer_name;
+	private Map<String, String> delivery_info;
 	
-	private String recipient_name;
-	
-	private String payment;
-	
-	private String address1;
-	
-	private String address2;
-	
-	private String mobilephone_number;
+	private Map<String, String> payment_info;
+
 	
 	@JsonIgnore
 	private Orders order;
@@ -51,8 +47,8 @@ public class OrderGoodsRequestDto {
 	
 	public Orders toOrderEntity() {
 		return Orders.builder()
-				.orderer_name(orderer_name)
-				.payment(payment)
+				.orderer_name(delivery_info.get("orderer_name"))
+				.payment(payment_info.get("payment"))
 				.user(user)
 				.build();
 	}
@@ -63,17 +59,17 @@ public class OrderGoodsRequestDto {
 				.item_option2(item_option2)
 				.item_name(item_name)
 				.item_price(item_price)
-				.order_quantity(order_quantity)
+				.item_quantity(item_quantity)
 				.order(order)
 				.build();
 	}
 	
 	public Delivery toDeliveryEntity() {
 		return Delivery.builder()
-				.recipient_name(recipient_name)
-				.address1(address1)
-				.address2(address2)
-				.mobilephone_number(mobilephone_number)
+				.recipient_name(delivery_info.get("recipient_name"))
+				.address1(delivery_info.get("address1"))
+				.address2(delivery_info.get("address2"))
+				.mobilephone_number(delivery_info.get("mobilephone_number"))
 				.order(order)
 				.build();
 	}

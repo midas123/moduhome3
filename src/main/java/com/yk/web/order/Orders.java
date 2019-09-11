@@ -38,7 +38,7 @@ public class Orders {
 	private String order_code;
 
 	@Column
-	private String Orderer_name;
+	private String orderer_name;
 	
 	@Column
 	private String payment;
@@ -70,7 +70,7 @@ public class Orders {
 			String delivery_state, List<OrderItems> items, Users user, Delivery delivery) {
 		this.order_id = order_id;
 		this.order_code = order_code;
-		Orderer_name = orderer_name;
+		this.orderer_name = orderer_name;
 		this.payment = payment;
 		this.order_state = order_state;
 		this.delivery_state = delivery_state;

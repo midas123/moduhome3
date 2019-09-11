@@ -9,6 +9,7 @@ import lombok.Setter;
 public class ApiResponseDto {
 	private Boolean success;
 	private String message;
+	private String ordercode;
 	 
 	@Builder 
 	public ApiResponseDto(Boolean success, String message) {

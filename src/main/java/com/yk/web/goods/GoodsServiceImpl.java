@@ -23,6 +23,10 @@ public class GoodsServiceImpl {
 		return goodsRepository.findAll();
 	}
 	
-	
+//	public List<GoodsImages> getGoodsDetailImages(Long goods_id){
+//		
+//		return goodsImagesRepository.findGoodsImagesById(goods_id);
+//	}
+//	
 	
 }

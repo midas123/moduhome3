@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yk.web.dto.ApiResponseDto;
 import com.yk.web.dto.OrderGoodsRequestDto;
 import com.yk.web.goods.Goods;
+import com.yk.web.goods.GoodsImages;
 import com.yk.web.goods.GoodsServiceImpl;
 import com.yk.web.order.OrderServiceImpl;
 
@@ -34,15 +37,18 @@ public class GoodsRestController {
 		return "main";
 	}
 	
-	@GetMapping("/goods/all")
+	@GetMapping(value="/goods/all", produces = "application/json; charset=UTF-8")
+	//@ResponseBody
 	public List<Goods> getGoodsList() {
 		return goodsServiceImpl.getAllGoods();
 	}
 	
+	
 	@PostMapping("/goods/order")
-	public ResponseEntity<?> orderGoods(@RequestBody OrderGoodsRequestDto dto){
-		String message = orderServiceImpl.orderGoods(dto);
-		return ResponseEntity.ok(new ApiResponseDto(false,message));
+	public ResponseEntity<?> orderGoods(@RequestBody List<OrderGoodsRequestDto> dtoList) throws Exception{
+		System.out.println("구매: "+dtoList.toString());
+		return ResponseEntity.ok(orderServiceImpl.orderGoods(dtoList));
+		
 	}
 	
 	@PutMapping("/goods/order/cancel")

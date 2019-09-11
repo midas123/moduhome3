@@ -38,6 +38,7 @@ public class UsersController {
 	
 	@GetMapping("/user/{username}")
 	public Users getUserInfo(@PathVariable String username) {	
+		System.out.println("getUserInfo: "+usersRepository.findByUsername(username));
 		return usersRepository.findByUsername(username).orElseThrow(()-> new AppException("회원 정보가 존재하지 않습니다."));
 	}
 

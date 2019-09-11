@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GoodsImages {
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long good_image_id;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private long goods_image_id;
 	
 	@Column
 	private String image_name;
@@ -32,9 +32,9 @@ public class GoodsImages {
 	private Goods goods;
 	
 	@Builder
-	public GoodsImages(long good_image_id, String image_name, Goods goods) {
+	public GoodsImages(long goods_image_id, String image_name, Goods goods) {
 		super();
-		this.good_image_id = good_image_id;
+		this.goods_image_id = goods_image_id;
 		this.image_name = image_name;
 		this.goods = goods;
 	}

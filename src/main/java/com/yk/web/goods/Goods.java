@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -59,6 +60,7 @@ public class Goods {
 	@OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
 	private List<GoodsDetail> goodsDetail = new ArrayList<>();
 	
+	@OrderBy("image_name DESC")
 	@JsonManagedReference 
 	@OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
 	private List<GoodsImages> goodsImages = new ArrayList<>();
