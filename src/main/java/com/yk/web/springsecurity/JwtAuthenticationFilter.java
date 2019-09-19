@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	                SecurityContextHolder.getContext().setAuthentication(authentication); //principal를 포함하는 security context를 SecurityContextHolder에 저장
 	            }
 	        } catch (Exception ex) {
-	            logger.error("Could not set user authentication in security context", ex);
+	            logger.error("토큰을 인증할 수 없습니다.", ex);
 	        }
 
 	        filterChain.doFilter(request, response);
@@ -45,6 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	    private String getJwtFromRequest(HttpServletRequest request) {
 	        String bearerToken = request.getHeader("Authorization");
+	        System.out.println("bearerToken: "+bearerToken);
 	        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 	            return bearerToken.substring(7, bearerToken.length());
 	        }

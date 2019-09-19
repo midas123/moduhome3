@@ -73,7 +73,6 @@ public class AuthController {
 		    return new ResponseEntity(new ApiResponseDto(false, "이미 사용 중인 이메일 입니다."),
 		            HttpStatus.BAD_REQUEST);
 		}
-		System.out.println("1: " +signUpRequest.getPassword());
 		Users user = signUpRequest.toEntity(); //Dto 객체에 담긴 사용자 정보를 Users 객채에 저장
 		user.setPassword(passwordEncoder.encode(signUpRequest.getPassword())); //비밀번호 암호화
 		Roles userRole = rolesRepository.findByName(RoleName.ROLE_USER) // 사용자 등급을 저장하는 객체

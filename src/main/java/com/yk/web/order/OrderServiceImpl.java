@@ -61,6 +61,9 @@ public class OrderServiceImpl {
 				//주문 상품 저장
 				dto.toOrderItemsEntity();
 				orderItemsRepository.save(dto.toOrderItemsEntity());
+				
+				//재고수량 업데이트
+				goodsDetailRepository.updateStock(Integer.parseInt(dto.getItem_quantity()), dto.getGd_id());
 	
 				
 			} else {
@@ -75,6 +78,8 @@ public class OrderServiceImpl {
 	@Transactional
 	public void cancelOrder(OrderGoodsRequestDto dto) {
 		orderRepository.cancelOrder("주문 취소(환불 대기)", "배송 취소", dto.getOrder_code()); //enum
+		goodsDetailRepository.updateStock((-Integer.parseInt(dto.getItem_quantity())), dto.getGd_id());
+
 	}
 	
 	private String makeOrderCode() throws Exception {
