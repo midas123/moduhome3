@@ -58,6 +58,9 @@ moduhome3
   * Delivery
   * OrderItems
 
+### 엔티티 관계도
+![md3-erd](https://user-images.githubusercontent.com/33915759/65936911-1f4ef000-e459-11e9-97ea-fd93421b0daa.png)
+
 
 ### 서버 및 DB
 * 톰캣
