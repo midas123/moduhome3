@@ -19,7 +19,8 @@ import com.yk.web.users.Users;
 import com.yk.web.users.UsersRepository;
 import com.yk.web.users.UsersServiceImpl;
 
-@CrossOrigin(origins="http://localhost:3000")
+//@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="${url.front}")
 @RequestMapping("/api-user")
 @RestController
 public class UsersController {

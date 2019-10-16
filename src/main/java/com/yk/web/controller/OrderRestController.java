@@ -16,7 +16,8 @@ import com.yk.web.dto.OrderGoodsRequestDto;
 import com.yk.web.goods.GoodsServiceImpl;
 import com.yk.web.order.OrderServiceImpl;
 
-@CrossOrigin(origins="http://localhost:3000")
+//@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="${url.front}")
 @RequestMapping("/api-order")
 @RestController
 public class OrderRestController {

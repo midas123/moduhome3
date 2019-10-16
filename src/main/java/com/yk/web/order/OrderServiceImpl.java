@@ -34,6 +34,7 @@ public class OrderServiceImpl {
 	@Autowired
 	private OrderItemsRepository orderItemsRepository;
 	
+	@Transactional
 	public orderResponseDto orderGoods(List<OrderGoodsRequestDto> dtoList) throws Exception {
 		System.out.println("orderGoods: "+dtoList.toString());
 		
